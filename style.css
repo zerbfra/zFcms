@@ -173,6 +173,11 @@ h3 {
 .blog-post {
   margin-bottom: 60px;
 }
+
+.blog-post-reduced {
+    margin-bottom: 10px;
+}
+
 .blog-post-title {
   margin-bottom: 5px;
   font-size: 28px;

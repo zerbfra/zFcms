@@ -27,7 +27,7 @@ class Post {
 
     function displayReduced() {
 
-		if($this->title) echo'<div class="blog-post"><h2 class="blog-post-title"><a href="index.php?a='.$this->file.'">'.$this->title.'</a></h2>';
+		if($this->title) echo'<div class="blog-post-reduced"><h2 class="blog-post-title"><a href="index.php?a='.$this->file.'">'.$this->title.'</a></h2>';
 		else echo'<div class="blog-post">';
 
         if($this->date) echo '<p class="blog-post-meta">'.$this->date->format('F d, Y').'</p>';
