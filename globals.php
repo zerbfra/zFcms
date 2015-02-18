@@ -12,5 +12,8 @@ define('CLASS_DIR', ROOT_DIR .'class/');
 require LIB_DIR."Parsedown.php";
 require CLASS_DIR."post.php";
 
+/* Constants */
+
+define('POST_PER_PAGE', 2);
 
 ?>

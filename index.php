@@ -13,8 +13,18 @@ if(isset($_GET["a"])) {
   $posts = get_single_post($article);
 
 } else {
-  // get all posts
-  $posts = get_posts();
+    // get all posts
+    if(!isset($_GET["s"])) $seq = 0;
+    else $seq = $_GET["s"];
+
+    $post_count = post_count();
+
+    // if lower than 0, return the 0 page
+    if($seq < 0) $seq = 0;
+    // if over the post_count give the 0 page
+    if($seq >= $post_count) $seq = 0;
+
+    $posts = get_page_posts($seq);
 }
 
 $archive = list_archive();
@@ -84,12 +94,15 @@ $archive = list_archive();
 
 
                 if(!$singlePost) {
-                  echo '<nav>
-                  <ul class="pager">
-                  <li><a href="#">Previous</a></li>
-                  <li><a href="#">Next</a></li>
-                  </ul>
-                  </nav>';
+                    $prev = $seq-POST_PER_PAGE;
+                    $next = $seq+POST_PER_PAGE;
+
+                    echo '<nav><ul class="pager">';
+
+                    if($seq > 0) echo'<li><a href="?s='.$prev.'"><i class="fa fa-chevron-left"></i></a></li>';
+                    if($next <= $post_count) echo'<li><a href="?s='.$next.'"><i class="fa fa-chevron-right"></i></a></li>';
+
+                    echo '</ul></nav>';
                 }
 
                 ?>

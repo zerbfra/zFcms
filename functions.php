@@ -125,4 +125,21 @@ function get_single_post($entry) {
     return get_posts($files);
 }
 
+function get_page_posts($initial) {
+
+    $files = array_diff(scandir(CONTENT_DIR), array('..', '.'));
+    // reverse order
+    rsort($files);
+    $page = array_slice($files, $initial, POST_PER_PAGE);
+
+    return get_posts($page);
+}
+
+
+function post_count() {
+    $files = array_diff(scandir(CONTENT_DIR), array('..', '.'));
+    return count($files);
+}
+
+
 ?>
