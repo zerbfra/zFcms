@@ -4,17 +4,14 @@
 require "globals.php";
 require "functions.php";
 
-$singlePost = false;
-
-if(isset($_GET["a"])) {
+if(isset($_GET["d"])) {
   // get only one article
-  $singlePost = true;
-  $article = $_GET['a'];
-  $posts = get_single_post($article);
+  $date = $_GET['d'];
+  $posts = get_archive($date);
 
 } else {
-  // get all posts
-  $posts = get_posts();
+  // get no posts
+  $posts = array();
 }
 
 $archive = list_archive();
@@ -79,17 +76,7 @@ $archive = list_archive();
 
                 <?php
                 foreach ($posts as $post) {
-                  $post->display();
-                }
-
-
-                if(!$singlePost) {
-                  echo '<nav>
-                  <ul class="pager">
-                  <li><a href="#">Previous</a></li>
-                  <li><a href="#">Next</a></li>
-                  </ul>
-                  </nav>';
+                  $post->displayReduced();
                 }
 
                 ?>
@@ -109,9 +96,9 @@ $archive = list_archive();
 
                     <?php
                     foreach ($archive as $date) {
-                     echo "<li><a href='archive.php?d=".$date."''>".$date."</a></li>";
-                   }
-                   ?>
+                        echo "<li><a href='archive.php?d=".$date."''>".$date."</a></li>";
+                    }
+                    ?>
 
                  </ol>
                </div>

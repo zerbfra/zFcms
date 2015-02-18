@@ -1,8 +1,8 @@
 <?php
 
-function get_posts() {
+function get_posts($files = array()) {
 
-	$files = array_diff(scandir(CONTENT_DIR), array('..', '.'));
+	if(empty($files)) $files = array_diff(scandir(CONTENT_DIR), array('..', '.'));
 	$posts = array();
 
 	foreach ($files as $entry) {
@@ -126,7 +126,7 @@ function get_single_post($entry) {
 }
 
 
-function get_archive() {
+function list_archive() {
 
   $files = array_diff(scandir(CONTENT_DIR), array('..', '.'));
   $archive = array();
@@ -145,13 +145,33 @@ function get_archive() {
           $date = date_create_from_format($format, $entry);
         }
 
-        $label = $date->format("F Y");
-
-        array_push($archive,$label);
+        if($date) {
+            $label = $date->format("F Y");
+            array_push($archive,$label);
+        }
       }
   }
   // ok, so delete duplicates and reverse order (we want nearest months first)
   return array_unique(array_reverse($archive));
+}
+
+function get_archive($month) {
+    // $month is a label in format F Y
+    $format = 'F Y';
+    $date = date_create_from_format($format, $month);
+
+    $yearNumber  = $date->format('Y');
+    $monthNumber = $date->format('m');
+
+
+    $files = array_diff(scandir(CONTENT_DIR), array('..', '.'));
+    $filter = $yearNumber."-".$monthNumber;
+
+    $filteredFiles = array_filter($files, function ($v) use($filter) {
+        return substr($v, 0, 7) == $filter;
+    });
+
+    return get_posts($filteredFiles);
 }
 
 ?>
