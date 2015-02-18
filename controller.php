@@ -8,7 +8,7 @@ if(!isset($_GET['p']) && !isset($_GET['archive'])) {
         // get only one article
         $single = true;
         $article = $_GET['show'];
-        $posts = get_single_post($article);
+        $posts = get_single_post(CONTENT_DIR,$article);
 
     } else {
         // get all posts for that page
@@ -33,7 +33,9 @@ if(!isset($_GET['p']) && !isset($_GET['archive'])) {
 
 } else {
     // other pages
-    $posts = get_single_post($page);
+    $posts = get_single_post(PAGES_DIR,$_GET['p']);
+
+    draw_page($posts);
 }
 
 
@@ -75,5 +77,15 @@ function draw_archive($date) {
     echo '</div><!-- /.blog-main -->';
 }
 
+function draw_page($posts) {
+
+    echo'<div class="col-sm-8 blog-main">';
+
+    foreach ($posts as $post) {
+        $post->display();
+    }
+
+    echo '</div><!-- /.blog-main -->';
+}
 
 ?>
