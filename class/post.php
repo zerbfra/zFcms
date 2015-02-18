@@ -12,7 +12,7 @@ class Post {
 		$Parsedown = new Parsedown(); // parsedown object
 		//$printDate =  $this->date->format('Y-m-d');
 
-		if($this->title) echo'<div class="blog-post"><h2 class="blog-post-title"><a href="?a='.$this->file.'">'.$this->title.'</a></h2>';
+		if($this->title) echo'<div class="blog-post"><h2 class="blog-post-title"><a href="?show='.$this->file.'">'.$this->title.'</a></h2>';
 		else echo'<div class="blog-post">';
 
 
