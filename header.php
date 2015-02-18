@@ -8,7 +8,7 @@
         <link rel="icon" href="../../favicon.ico">
 
         <?php
-            if($single) {
+            if(isset($single) && $single) {
                 echo '<title>'.$posts[0]->title.'- zerbinatifrancesco.it</title>';
             } else {
                 echo '<title>zerbinatifrancesco.it</title>';
@@ -33,9 +33,17 @@
                 <div class="container">
                     <nav class="blog-nav">
                         <a class="blog-nav-item active" href="index.php">Home</a>
+                        <?php
+                            $files = get_pages_list();
+                            foreach ($files as $page) {
+                                echo '<a class="blog-nav-item" href="?p='.$page.'">'.$page.'</a>';
+                            }
+                        ?>
+                        <!--
                         <a class="blog-nav-item" href="#">About</a>
                         <a class="blog-nav-item" href="#">App Store</a>
                         <a class="blog-nav-item" href="#">Contact</a>
+                        -->
                     </nav>
                 </div>
             </div>

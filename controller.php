@@ -33,7 +33,7 @@ if(!isset($_GET['p']) && !isset($_GET['archive'])) {
 
 } else {
     // other pages
-    $page = $_GET['p'];
+    $posts = get_single_post($page);
 }
 
 

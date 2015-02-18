@@ -141,5 +141,16 @@ function post_count() {
     return count($files);
 }
 
+function get_pages_list() {
+
+    $files = array_diff(scandir(PAGES_DIR), array('..', '.'));
+    $files = array_map(function ($entry) { return  str_replace('.md','',$entry); }, $files);
+    return $files;
+}
+
+function get_page($page) {
+
+}
+
 
 ?>

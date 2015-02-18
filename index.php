@@ -5,17 +5,19 @@ require 'globals.php';
 require 'functions.php';
 
 
+// Include differents section for layout
 
-
-
-/* Include differents section for layout */
+/* Header */
 
 include 'header.php';
 
 /* Page controller */
 require 'controller.php';
 
+/* Sidebar */
 include 'sidebar.php';
+
+/* Footer */
 include 'footer.php';
 
 ?>
