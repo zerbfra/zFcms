@@ -100,7 +100,7 @@ $archive = list_archive();
                     echo '<nav><ul class="pager">';
 
                     if($seq > 0) echo'<li><a href="?s='.$prev.'"><i class="fa fa-chevron-left"></i></a></li>';
-                    if($next <= $post_count) echo'<li><a href="?s='.$next.'"><i class="fa fa-chevron-right"></i></a></li>';
+                    if($next < $post_count) echo'<li><a href="?s='.$next.'"><i class="fa fa-chevron-right"></i></a></li>';
 
                     echo '</ul></nav>';
                 }
