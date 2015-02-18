@@ -57,74 +57,16 @@ function get_posts($files = array()) {
     		});
 
   		} else {
-        // not found, nearly impossible
+            // not found, nearly impossible
+            $post->title = "404: Not found";
+            $post->date = NULL;
+            $post->body = NULL;
+            array_push($posts, $post);
       }
 	}
 
 	return $posts;
 }
-
-
-function get_single_post($entry) {
-
-	$entry = $entry.".md";
-	$posts = array();
-
-
-  $post = new Post;
-
-	if(file_exists(CONTENT_DIR.$entry)) {
-
-    	$content = array();
-    	$file = file_get_contents(CONTENT_DIR.$entry);
-
-   		$headers = array(
-      		'title'     => 'Title',
-      		//'date'      => 'Date'
-      		// eventually one can add more fields
-      	);
-
-
-    	foreach ($headers as $field => $regex){
-      		if (preg_match('/^[ \t\/*#@]*' . preg_quote($regex, '/') . ':(.*)$/mi', $file, $match) && $match[1]) {
-        		$content[ $field ] = trim(preg_replace("/\s*(?:\*\/|\?>).*/", '', $match[1]));
-      		} else {
-        		$content[ $field ] = '';
-      		}
-    	}
-
-
-    	$content['body'] = preg_replace('#/\*.+?\*/#s', '', $file); // Remove comments and meta
-
-    	/* New post creation */
-
-    	// file and title
-    	$post->file =  str_replace('.md','',$entry);
-    	$post->title = $content['title'];
-
-      // date
-      $format = 'Y-m-d-H:i'; // 2015-01-01-18:00
-      // firstly I will try with hour and minute, if it fails, try only with Y-m-d
-      if(($date = date_create_from_format($format, $post->file)) == false) {
-        $format = 'Y-m-d';
-        $date = date_create_from_format($format, $post->file);
-      }
-      $post->date = $date;
-
-    	//body
-    	$post->body = $content['body'];
-
-	} else {
-        $post->title = "404: Not found";
-        $post->date = NULL;
-        $post->body = NULL;
-  }
-
-  array_push($posts, $post);
-
-	return $posts;
-}
-
 
 function list_archive() {
 
@@ -172,6 +114,15 @@ function get_archive($month) {
     });
 
     return get_posts($filteredFiles);
+}
+
+function get_single_post($entry) {
+
+	$entry = $entry.".md";
+    $files = array();
+    array_push($files,$entry);
+
+    return get_posts($files);
 }
 
 ?>
