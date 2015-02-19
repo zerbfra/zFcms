@@ -28,7 +28,7 @@
 
     <body>
         <div id="wrap">
-            <div class="blog-masthead">
+            <div class="blog-masthead  navbar-fixed-top">
                 <div class="container">
                     <nav class="blog-nav">
 
