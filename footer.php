@@ -4,8 +4,7 @@
 </div>
 
 <footer class="blog-footer">
-    <p>&copy; 2015 <a href="https://twitter.com/zerbfra" target="_blank">Zerbinati Francesco</a>, made with love with
-        Markdown and <a href="http://getbootstrap.com" target="_blank">Bootstrap</a></p>
+    <p>&copy; 2015 made with ♥ by <a href="https://twitter.com/zerbfra" target="_blank">Zerbinati Francesco</a></p>
     <p>
         <a href="#">Back to top</a>
     </p>

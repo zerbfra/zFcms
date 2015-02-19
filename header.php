@@ -39,7 +39,7 @@
 
                             $files = get_pages_list();
                             foreach ($files as $page) {
-                                if($_GET['p'] == $page) echo '<a class="blog-nav-item active" href="?p='.$page.'">'.$page.'</a>';
+                                if(isset($_GET['p']) && $_GET['p'] == $page) echo '<a class="blog-nav-item active" href="?p='.$page.'">'.$page.'</a>';
                                 else echo '<a class="blog-nav-item" href="?p='.$page.'">'.$page.'</a>';
                             }
                         ?>
