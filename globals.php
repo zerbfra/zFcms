@@ -16,5 +16,9 @@ require CLASS_DIR."post.php";
 /* Constants */
 
 define('POST_PER_PAGE', 2);
+define('TITLE',"Francesco");
+define('URL',"zerbinatifrancesco.it");
+define('DESCRIPTION',"Engineering Student, iOS and Web Developer. I'm in love with Objective-C, HTML5 and PHP.<br>Check out my apps on App Store!");
+
 
 ?>

@@ -9,12 +9,11 @@
 
         <?php
             if(isset($single) && $single) {
-                echo '<title>'.$posts[0]->title.'- zerbinatifrancesco.it</title>';
+                echo '<title>'.$posts[0]->title.'- '.URL.'</title>';
             } else {
-                echo '<title>zerbinatifrancesco.it</title>';
+                echo '<title>'.URL.'</title>';
             }
         ?>
-
         <!-- Bootstrap core CSS -->
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -32,11 +31,16 @@
             <div class="blog-masthead">
                 <div class="container">
                     <nav class="blog-nav">
-                        <a class="blog-nav-item active" href="index.php">Home</a>
+
                         <?php
+
+                            if(!isset($_GET['p'])) echo '<a class="blog-nav-item active" href="index.php">Home</a>';
+                            else echo '<a class="blog-nav-item" href="index.php">Home</a>';
+
                             $files = get_pages_list();
                             foreach ($files as $page) {
-                                echo '<a class="blog-nav-item" href="?p='.$page.'">'.$page.'</a>';
+                                if($_GET['p'] == $page) echo '<a class="blog-nav-item active" href="?p='.$page.'">'.$page.'</a>';
+                                else echo '<a class="blog-nav-item" href="?p='.$page.'">'.$page.'</a>';
                             }
                         ?>
                         <!--
@@ -51,7 +55,6 @@
             <div class="container">
 
                 <div class="blog-header">
-                    <h1 class="blog-title">Francesco</h1>
-                    <p class="lead blog-description">Engineering Student, iOS and Web Developer. I'm in love with Objective-C, HTML5 and PHP.
-                        <br>Check out my apps on App Store!</p>
+                    <h1 class="blog-title"><?php echo TITLE; ?></h1>
+                    <p class="lead blog-description"><?php echo DESCRIPTION; ?></p>
                 </div>
