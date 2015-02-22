@@ -6,15 +6,16 @@
             in Computer Engineering at Politecnico di Milano.
         </p>
     </div>
+
     <div class="sidebar-module">
         <h4>Archives</h4>
         <ol class="list-unstyled">
 
             <?php
-            $archive = list_archive();
-            foreach ($archive as $date) {
-                echo "<li><a href='index.php?archive=".$date."''>".$date."</a></li>";
-            }
+                $archive = list_archive();
+                foreach ($archive as $date) {
+                    echo "<li><a href='index.php?archive=".$date."''>".$date."</a></li>";
+                }
             ?>
 
         </ol>
@@ -27,4 +28,6 @@
             <li><a href="mailto:me@zerbinatifrancesco.it"><i class="fa fa-envelope"></i> Mail</a></li>
         </ol>
     </div>
+
+
 </div><!-- /.blog-sidebar -->

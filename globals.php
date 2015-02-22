@@ -18,7 +18,7 @@ require CLASS_DIR."post.php";
 define('POST_PER_PAGE', 2);
 define('TITLE',"Francesco");
 define('URL',"zerbinatifrancesco.it");
-define('DESCRIPTION',"Engineering Student, iOS and Web Developer. I'm in love with Objective-C, HTML5 and PHP.<br>Check out my apps on App Store!");
+define('DESCRIPTION',"Engineering Student, iOS and Web Developer. I'm in love with Objective-C, HTML5 and PHP.<br>Check out my apps on <a href='https://itunes.apple.com/us/artist/francesco-zerbinati/id669900608' target='_blank'>App Store</a>!");
 
 
 ?>
