@@ -12,7 +12,7 @@ This first implementation took me about 4-5 hours of work. It is based on the fo
 * Bootstrap, for the layout part
 * Parsedown, an amazing PHP library to parse Markdown files
 * All the posts are written in pure Markdown and then rearranged by the scripts in the correct order. 
-* In addition, one can can create some static pages, and add them to the navbar on top, for example, the About page.
+* In addition, one can can create some static pages, and add them to the navbar on top, for example, an "About" page.
 * The Archive by month is automatically generated
 * When you reach the  `POST_PER_PAGE ` limit a new page is created and navigation links will appear in the footer of the blog page
 
