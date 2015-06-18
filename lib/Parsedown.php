@@ -17,7 +17,7 @@ class Parsedown
 {
     # ~
 
-    const version = '1.5.1';
+    const version = '1.5.3';
 
     # ~
 
@@ -103,12 +103,6 @@ class Parsedown
         '`' => array('FencedCode'),
         '|' => array('Table'),
         '~' => array('FencedCode'),
-    );
-
-    # ~
-
-    protected $DefinitionTypes = array(
-        '[' => array('Reference'),
     );
 
     # ~
@@ -1212,7 +1206,7 @@ class Parsedown
         {
             if (preg_match('/^\s*\[(.*?)\]/', $remainder, $matches))
             {
-                $definition = $matches[1] ? $matches[1] : $Element['text'];
+                $definition = strlen($matches[1]) ? $matches[1] : $Element['text'];
                 $definition = strtolower($definition);
 
                 $extent += strlen($matches[0]);
