@@ -7,68 +7,73 @@ function get_posts($dir,$files = array()) {
 
     foreach ($files as $entry) {
 
-        $post = new Post;
+        $parts = explode('.', $entry);
 
-        if($dir == CONTENT_DIR) $post->isPage = false;
-        else $post->isPage = true;
+        if($parts[1] == 'md') {
 
-        if(file_exists($dir.$entry)) {
+            $post = new Post;
 
-            $content = array();
-            $file = file_get_contents($dir.$entry);
+            if($dir == CONTENT_DIR) $post->isPage = false;
+            else $post->isPage = true;
 
-            $headers = array(
-                'title'     => 'Title'
-                // eventually one can add more fields, for istance:
-                //'date'      => 'Date'
-            );
+            if(file_exists($dir.$entry)) {
+
+                $content = array();
+                $file = file_get_contents($dir.$entry);
+
+                $headers = array(
+                    'title'     => 'Title'
+                    // eventually one can add more fields, for istance:
+                    //'date'      => 'Date'
+                );
 
 
-            foreach ($headers as $field => $regex){
-                if (preg_match('/^[ \t\/*#@]*' . preg_quote($regex, '/') . ':(.*)$/mi', $file, $match) && $match[1]) {
-                    $content[ $field ] = trim(preg_replace("/\s*(?:\*\/|\?>).*/", '', $match[1]));
-                } else {
-                    $content[ $field ] = '';
+                foreach ($headers as $field => $regex){
+                    if (preg_match('/^[ \t\/*#@]*' . preg_quote($regex, '/') . ':(.*)$/mi', $file, $match) && $match[1]) {
+                        $content[ $field ] = trim(preg_replace("/\s*(?:\*\/|\?>).*/", '', $match[1]));
+                    } else {
+                        $content[ $field ] = '';
+                    }
                 }
-            }
 
 
-            $content['body'] = preg_replace('#/\*.+?\*/#s', '', $file); // Remove comments and meta
+                $content['body'] = preg_replace('#/\*.+?\*/#s', '', $file); // Remove comments and meta
 
-            /* New post creation */
+                /* New post creation */
 
-            // file and title
-            $post->file =  str_replace('.md','',$entry);
-            $post->title = $content['title'];
+                // file and title
+                $post->file =  str_replace('.md','',$entry);
+                $post->title = $content['title'];
 
-            // only a blog entry has a date
-            if(!$post->isPage) {
-                // date
-                $format = 'Y-m-d-H:i'; // 2015-01-01-18:00
-                // firstly I will try with hour and minute, if it fails, try only with Y-m-d
-                if(($date = date_create_from_format($format, $post->file)) == false) {
-                    $format = 'Y-m-d';
-                    $date = date_create_from_format($format, $post->file);
+                // only a blog entry has a date
+                if(!$post->isPage) {
+                    // date
+                    $format = 'Y-m-d-H:i'; // 2015-01-01-18:00
+                    // firstly I will try with hour and minute, if it fails, try only with Y-m-d
+                    if(($date = date_create_from_format($format, $post->file)) == false) {
+                        $format = 'Y-m-d';
+                        $date = date_create_from_format($format, $post->file);
+                    }
+                    $post->date = $date;
                 }
-                $post->date = $date;
+
+                //body
+                $post->body = $content['body'];
+
+                array_push($posts, $post);
+
+                // compare files dates and order from last to first
+                usort($posts, function($a, $b) {
+                    return $a->date < $b->date;
+                });
+
+            } else {
+                // not found, nearly impossible
+                $post->title = "404: Not found";
+                $post->date = NULL;
+                $post->body = NULL;
+                array_push($posts, $post);
             }
-
-            //body
-            $post->body = $content['body'];
-
-            array_push($posts, $post);
-
-            // compare files dates and order from last to first
-            usort($posts, function($a, $b) {
-                return $a->date < $b->date;
-            });
-
-        } else {
-            // not found, nearly impossible
-            $post->title = "404: Not found";
-            $post->date = NULL;
-            $post->body = NULL;
-            array_push($posts, $post);
         }
     }
 
@@ -82,21 +87,26 @@ function list_archive() {
 
     foreach ($files as $entry) {
 
-        if(file_exists(CONTENT_DIR.$entry)) {
+        $parts = explode('.', $entry);
 
-            // date
-            $format = 'Y-m-d-H:i'; // 2015-01-01-18:00
-            $entry = str_replace('.md','',$entry);
+        if($parts[1] == 'md') {
 
-            // firstly I will try with hour and minute, if it fails, try only with Y-m-d
-            if(!($date = date_create_from_format($format, $entry))) {
-                $format = 'Y-m-d';
-                $date = date_create_from_format($format, $entry);
-            }
+            if(file_exists(CONTENT_DIR.$entry)) {
 
-            if($date) {
-                $label = $date->format("F Y");
-                array_push($archive,$label);
+                // date
+                $format = 'Y-m-d-H:i'; // 2015-01-01-18:00
+                $entry = str_replace('.md','',$entry);
+
+                // firstly I will try with hour and minute, if it fails, try only with Y-m-d
+                if(!($date = date_create_from_format($format, $entry))) {
+                    $format = 'Y-m-d';
+                    $date = date_create_from_format($format, $entry);
+                }
+
+                if($date) {
+                    $label = $date->format("F Y");
+                    array_push($archive,$label);
+                }
             }
         }
     }
