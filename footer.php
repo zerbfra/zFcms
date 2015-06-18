@@ -4,7 +4,7 @@
 </div>
 
 <footer class="blog-footer">
-    <p>&copy; 2015 made with ♥ by <a href="https://twitter.com/zerbfra" target="_blank">Zerbinati Francesco</a></p>
+    <p>&copy; zFcms made with ♥ by <a href="https://twitter.com/zerbfra" target="_blank">zerbfra</a></p>
     <p>
         <a href="#">Back to top</a>
     </p>
