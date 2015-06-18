@@ -15,10 +15,12 @@ require CLASS_DIR."post.php";
 
 /* Constants */
 
-define('POST_PER_PAGE', 2);
-define('TITLE',"Your Blog");
-define('URL',"yoururl.com");
-define('DESCRIPTION',"Your description");
+define('POST_PER_PAGE', 2); 				// how many posts to display per page
+define('TITLE',"Your Blog"); 				// the title of your blog
+define('URL',"yoururl.com"); 				// your website url/title for the browser
+define('DESCRIPTION',"Your description"); 	// a description for the website (header)
 
+// ABOUT SIDEBAR
+define('ABOUT',"Your about <b>sidebar</b>. You can put HTML!"); 
 
 ?>
