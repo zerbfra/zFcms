@@ -1,5 +1,5 @@
 # zFcms
-Lightweight and fast markdown CMS for personal websites
+_Lightweight and fast markdown CMS for personal websites_
 
 ## A simple CMS
 
